@@ -1,0 +1,122 @@
+Docker Concepts:
+
+Container: Running image of docker file.
+
+docker images --->
+
+docker run hellow-world --->
+docker images --->
+docker ps --->
+docker ps -a --->
+
+Note: We can run the same image in n number of times. 
+
+docker run --name mycontainer hellow-world --->
+docker ps -a --->
+
+
+Registry(DockerHub)/Repo(Folder/directories):tags(java/php/nginx/apache2)
+Syntax:Registry/username/Repo:tag(image name)
+
+docker pull devopstrainer/myimage:10 ---> 
+docker images ---.
+docker ps -a --->
+
+docker tag devopstrainer/myimage:10 devopstrainer/myprivaterepo:1 --->
+docker images --->
+docker login ---> we need to provide the dockerhub credentials(username & password).
+docker push devopstrainer/myprivaterepo:1 --->
+docker images --->
+docker ps -a --->
+docker tag devopstrainer/myimage:10 devopstrainer/myprivaterepo --->
+docker push devopstrainer/myprivaterepo --->
+docker images --->
+
+cd /var/lib/docker ---> Home Directory of Docker ---> ls --->
+
+docker ps -a --->
+
+
+docker run -itd ubuntu ---> To run the containers in Detached Mode
+docker images
+docker ps -a --->
+
+docker stop <container name/id> --->
+docker ps -a --->
+docker start <container name/id> --->
+docker ps -a --->
+
+Note:
+Run Command: Run is always create new a container. Docker run image name to create a container.
+Start Command: It starts if already existing. Docker start Container name/container id
+
+docker ps -a --->
+
+docker stop <container name/id> --->
+docker rm <container name/id> ---> to delete the containers.
+docker ps -a --->
+docker rmi <image name/id> ---> to delete the images.
+
+docker run -it ubuntu ---> To run the container in interactive terminal mode. & enter exit ---> to come out of the container.
+docker run -it ubuntu ---> To run the container in interactive terminal mode. & press ctrl p +ctrl q ---> to come out of the container and container is in running mode.
+
+docker rm <container name/id> ---> to delete the containers.
+docker rmi <image name/id> ---> to delete the images.
+
+docker run -it ubuntu ---> & press ctrl p +ctrl q ---> to come out of the container to keep the container in running mode.
+
+docker commit <contaier id> myimage:vim ---> 
+docker images --->
+docker run -it myimage:vim ---> & press ctrl p +ctrl q ---> to come out of the container to keep the container in running mode.
+
+DockerFile:
+DockerFile: The docker is to build our own custome image as per requirement.
+
+mkdir dockerfiles ---> cd dockerfiles --->
+sudo vim dockerfile --->
+
+From ubuntu
+Maintainer "Preethi"
+Run apt-get update
+Run apt-get install vim -y
+CMD /bin/echo "Hello from my container"
+
+:wq!
+
+docker build -t myimage:dockerfile . --->
+docker images --->
+docker history myimage:docerfile --->
+docker run -it myimage:dockerfile --->
+docker run -it myimage:dockerfile /bin/bash --->
+
+
+docker run -itd nginx --->  with out port forwarding
+docker ps -a --->
+docker inspect <container id> --->
+curl 172.17.30.20:80 --->
+curl 65.1.134.50:80 --->
+docker run -itd -P nginx ---> Free Port Forwarding
+docker ps -a --->
+curl 65.1.134.50:49153 --->
+docker run -itd -p 9999:80 nginx ---> Binding Port forwarding. Here we give the port number.
+docker ps -a ---> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
