@@ -101,6 +101,71 @@ curl 65.1.134.50:49153 --->
 docker run -itd -p 9999:80 nginx ---> Binding Port forwarding. Here we give the port number.
 docker ps -a ---> 
 
+Docker Volumes: Volumes are nothing but a Data Directories. Volumes are stored at /var/lib/docker/volumes --->
+A Docker volume is an independent file system & volumes stored as part of the host file system entirely managed by Docker and exists as a normal file or directory on the host, where data is persisted. On Linux, volumes are stored in “/var/lib/docker/volume”.
+
+Note; We can not attach running containers to volume. Volumes are mapped with Containers not an image.
+
+docker system prune --all ---> to delete all the volumes if present
+docker volume ls --->
+docker volume create vol1 --->
+docker volume inspect vol1 --->
+docker run -it --name test1 -v vol1:/mylogs ubuntu ---> To attach the container to volume & in interactive mode--->
+docker run -it --name test2 -v vol2(random bind mount path):/newlogs ubuntu ---> To attach the container to volume & in interactive mode--->
+
+cd mylogs ---> ls ---> ctrl p + ctrl q --->
+
+cd /var/lib/docker/volume/vol2_data ---> pwd ---> ls --->
+
+
+docker ps -a --->
+docker attach test1  --->
+touch file1.txt -->
+echo "i am from test1" >> file1.txt --->
+docker attach test1 --->
+ls -->
+
+docker inspect test1 ---> we can see the container mounted to which volumes at Mount, Source section in the volumes.
+docker volume ls --->
+docker ps -a --->
+
+Random Host:
+docker run -it --name test3 -v <absolute path>:/newlogs ubuntu ---> Absolute Path volume is also called as Bind Mout File system.
+
+docker volume ls --->
+docker volume rm vol1 ---> to delete or remove the volumes
+docker ps -a --->
+docker inspect test1 ----> to know the test1 attached which volume.
+
+
+
+Deploying war file wich created in Jenkins's pipeline package in Docker:
+
+Note:  /var/lib/jenkins/workspace/ ---> Jenkins workspace
+Jenkins ---> Manage jenkins ---> Manage Credentials ---> Jenkins ---> ssh-user --> Add Credentials ---. docker-hub credentials(user name & password)
+Jenkins ---> Package pipeline job ---> configure ---> Build ---> Execute shell in Add Build Steps ---> 
+Jenkins ---> Package pipeline job ---> configure ---> Build Triggers ---> Build Environment---> Add Username & Password of DockerHub--->
+
+touch dockerfile
+cat <<EOT>> dockerfile
+From tomcat
+Add target/addressbook.war /usr/local/tomcat/webapps
+Expose 8080
+CMD ["catalina.sh", "run"]
+sudo docker build -t devopstrainer/myrepoprivate:$BUILD_NUMBER .
+sudo docker login -u $USERNAME -p $PASSWORD
+sudo docker push devopstrainer/myrepoprivate:$BUILD_NUMBER .
+docker run -itd -P devopstrainer/myrepoprivate:$BUILD_NUMBER .
+
+save ---> run the job or build job ---> we can see the jenkins/workspace --->
+
+vim /etc/sudoers --->
+jenkins ALL=NOPASSWD: ALL
+:wq!
+
+
+docker ps -a ---> and we can check the Dockerhub and we can see the docker images in DockerHub.
+
 
 
 
