@@ -23,6 +23,8 @@ docker images ---.
 docker ps -a --->
 
 docker tag devopstrainer/myimage:10 devopstrainer/myprivaterepo:1 --->
+docker tag hello-world venkatanarasimha/devopstestrepo:hello-world --->
+docker push venkatanarasimha/devopstestrepo:hello-world --->
 docker images --->
 docker login ---> we need to provide the dockerhub credentials(username & password).
 docker push devopstrainer/myprivaterepo:1 --->
