@@ -1,0 +1,123 @@
+What is Docker?
+Docker is a Containerization platform for packaging, deploying, and running applications as CONTAINERS.
+
+What is containerization?
+Containerization is a lightweight form of virtualization that allows you to encapsulate an application and its dependencies into a self-contained unit called a "container." 
+Docker applications run in containers that can be used on any system: a developer’s laptop, systems on premises, or in the cloud. (it runs the same)
+Containers share the host operating system's kernel, but they have their own isolated file system, processes, and networking.
+
+Difference between VMs & Containers:
+Aspect               Containers                   Virtual Machines
+Resource Usage       Lightweight, efficient       Heavier, more resource usage
+Startup Time         Quick start                  Slower start
+Isolation            Process-level separation     Full OS isolation
+Portability          Highly portable              Compatibility concerns
+Resource Overhead    Minimal overhead             Higher overhead
+Isolation Level      Lighter isolation            Stronger isolation
+
+
+Docker Architecture:
+Docker uses a client-server architecture to manage and run containers:
+Docker Client:
+- The Docker client is the command-line interface (CLI) or graphical user interface (GUI) that users interact with to build, manage, and control Docker containers.
+- It sends commands to the Docker daemon to perform various tasks.
+Docker Daemon:
+- The Docker daemon is a background process that manages Docker containers on a host system.
+- It listens for Docker API requests and takes care of building, running, and managing containers.
+Docker Registry:
+- Docker images can be stored and shared through Docker registries.
+- A Docker registry is a repository for Docker images, and it can be public (like Docker Hub) or private.
+Docker Hub:
+- Docker Hub is a cloud-based registry service provided by Docker, where users can find, share, and store Docker images.
+- It serves as a central repository for Docker images.
+
+Here's a high-level overview of the interaction between these components:
+- The Docker client communicates with the Docker daemon, sending commands and receiving information about containers, images, etc.
+- Docker images are fetched or built from the Docker registry.
+- Containers are created, started, stopped, and managed by the Docker daemon.
+
+
+Image Commands:
+- docker pull: Pull an image from a registry.
+    - Example: `docker pull nginx:latest`
+- docker build: Build an image from a Dockerfile.
+    - Example: `docker build -t myapp:1.0 .`
+- docker images: List all images on the local machine.
+    - Example: `docker images`
+- docker rmi: Remove an image.
+    - Example: `docker rmi image_id`
+
+
+2. Container Commands:
+    - docker run: Run a container from an image.
+        - Example: `docker run -d -p 8080:80 myapp:1.0`
+    - docker ps: List running containers.
+        - Example: `docker ps`
+    - docker stop: Stop a running container.
+        - Example: `docker stop container_id`
+    - docker rm: Remove a stopped container.
+        - Example: `docker rm container_id`
+    - docker exec: Execute a command in a running container.
+        - Example: `docker exec -it container_id bash`
+    - docker logs: View logs of a container.
+        - Example: `docker logs container_id`
+
+3. Volume Commands:
+    - docker volume ls: List all volumes.
+        - Example: `docker volume ls`
+    - docker volume create: Create a new volume.
+        - Example: `docker volume create myvolume`
+4. Network Commands:
+    - docker network ls: List all networks.
+        - Example: `docker network ls`
+    - docker network create: Create a new network.
+        - Example: `docker network create mynetwork`
+5. Docker Compose Commands:
+    - docker-compose up: Start services defined in a `docker-compose.yml` file.
+        - Example: `docker-compose up -d`
+    - docker-compose down: Stop and remove services defined in a `docker-compose.yml` file.
+        - Example: `docker-compose down`
+    - docker-compose ps: List services and their status.
+        - Example: `docker-compose ps`
+
+6. Swarm Commands (for orchestration):
+    - docker swarm init: Initialize a Docker swarm.
+        - Example: `docker swarm init`
+    - docker service: Manage Docker services in a swarm.
+        - Example: `docker service ls`
+7. System Information:
+    - docker version: Display Docker version information.
+        - Example: `docker version`
+    - docker info: Display system-wide information about Docker.
+        - Example: `docker info`
+8. Image Commands:
+    - Tag an Image:
+        - Example: `docker tag myapp:1.0 myregistry/myapp:1.0`
+        - Explanation: Tags an image with a different name, providing a way to reference the same image under different names.
+- Remove Unused Images:
+    - Example: `docker image prune`
+    - Explanation: Removes all dangling (unused) images.
+- Remove All Images:
+    - Example: `docker rmi $(docker images -q)`
+    - Explanation: Removes all images on the local machine.
+9. Container Commands:
+    - Remove Stopped Containers:
+        - Example: `docker container prune`
+        - Explanation: Removes all stopped containers.
+    - Remove All Containers:
+        - Example: `docker rm -f $(docker ps -aq)`
+        - Explanation: Removes all containers, including running ones.
+10. Volume Commands:
+    - Remove Unused Volumes:
+        - Example: `docker volume prune`
+        - Explanation: Removes all unused volumes.
+11. Network Commands:
+    - Remove Unused Networks:
+        - Example: `docker network prune`
+        - Explanation: Removes all unused networks.
+12. System Cleanup:
+    - Remove All (Containers, Images, Volumes, Networks):
+        - Example: `docker system prune -a`
+        - Explanation: Removes all stopped containers, unused networks, dangling images, and unused volumes.
+
+
